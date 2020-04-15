@@ -1,14 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {render} from 'react-dom';
 
-const Saludaridiomas = ({idiom}) =>{
+const Saludo = ({idiom='es' , nombre}) =>{
   if (idiom === "es"){
-    return <span>Hola</span>
+    return <span>Hola {nombre}</span>
   } else {
-    return <span>Hello</span>
+    return <span>Hello {nombre}</span>
   }
+} 
+const Ingnombre= () =>{
+  const [name, setName]=useState("")
+   return(
+    <div>
+      <input onChange={ (ev) => {setName(ev.target.value)}}/>
+      <p>Nombre: {name}</p>
+    </div>
+  )
 }
-
+const Contador = ({}) =>{
+  const[estado, setEstado]=useState(0);
+  return(
+    <div>
+      <button onClick={ () => {setEstado(++estado)}}>Sumar</button>
+      <button onClick={ () => {setEstado(--estado)}}>Restar</button>
+      <p>{estado}</p>
+    </div>
+  )
+}
 let lista = [
   'Japo',
   'Paloma',
@@ -23,9 +41,17 @@ const GetNombres = ({lta}) => {
 }
 const App = () => {
  return (
-   <ul>
-    <GetNombres lta={lista}/>
-   </ul>
+   <div>
+      <Saludo nombre='Marcelo' idiom='en'/>
+      <br/><br/>
+      <Contador />
+      <br/>
+      <Ingnombre/>
+      <ul>
+        <GetNombres lta={lista}/>
+    </ul>
+   </div>
+  
  )
 
 }
